@@ -25,28 +25,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/op/Desktop/spring/discovery/src/main/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.37586206&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;01cb50baaae7f8c0a6c9e68e7ba0ae30&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/op/Desktop/spring/config/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.37586206",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "spring.configuration.checksum": "133e681e0aa35e4f164273a059fc7023"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\op\Desktop\spring\config\src\main\resources" />
+      <recent name="C:\Users\op\Desktop\spring\auth\src\main\java\com\example\theproject\dto" />
       <recent name="C:\Users\op\Desktop\spring\discovery\src\main\resources" />
     </key>
   </component>
@@ -68,6 +76,13 @@
     <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MyApiApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Auth" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.theproject.MyApiApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -98,6 +113,17 @@
       <workItem from="1697724460903" duration="1087000" />
       <workItem from="1698116564674" duration="601000" />
       <workItem from="1698180613919" duration="32000" />
+      <workItem from="1698706354325" duration="634000" />
+      <workItem from="1698707024016" duration="259000" />
+      <workItem from="1698707311508" duration="1838000" />
+      <workItem from="1698709281047" duration="919000" />
+      <workItem from="1698767958130" duration="777000" />
+      <workItem from="1698942571670" duration="401000" />
+      <workItem from="1699015441001" duration="820000" />
+      <workItem from="1699119224938" duration="129000" />
+      <workItem from="1699136809309" duration="1045000" />
+      <workItem from="1699375547183" duration="1788000" />
+      <workItem from="1699399553937" duration="6178000" />
     </task>
     <servers />
   </component>
