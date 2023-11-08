@@ -38,6 +38,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
     "spring.configuration.checksum": "ae0998b21510091f79439d22362d776e"
   }
@@ -104,7 +105,7 @@
       <updated>1699408047034</updated>
       <workItem from="1699408047034" duration="8000" />
       <workItem from="1699408165296" duration="516000" />
-      <workItem from="1699408716304" duration="1262000" />
+      <workItem from="1699408716304" duration="4047000" />
     </task>
     <servers />
   </component>

@@ -70,7 +70,7 @@ public class SecurityConfig {
         return new JwtFilter();
     }
 
-  // authority hierarchy
+    // authority hierarchy
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
