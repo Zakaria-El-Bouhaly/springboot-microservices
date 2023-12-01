@@ -2,8 +2,8 @@ package com.example.theproject.services;
 
 import com.example.theproject.dto.OfferDto;
 import com.example.theproject.models.Offer;
+import com.example.theproject.openfeignclients.UserFeignClient;
 import com.example.theproject.repository.OfferRepo;
-import com.example.theproject.repository.UserRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,13 @@ import java.util.List;
 public class OfferService {
 
     private OfferRepo offerRepo;
-    private UserRepo userRepo;
+    private final UserFeignClient userFeignClient;
 
     @Autowired
-    public OfferService(OfferRepo offerRepo, UserRepo userRepo
+    public OfferService(OfferRepo offerRepo, UserFeignClient userRepo
     ) {
         this.offerRepo = offerRepo;
-        this.userRepo = userRepo;
+        this.userFeignClient = userRepo;
     }
 
     public List<Offer> getAllOffers() {
@@ -31,7 +31,7 @@ public class OfferService {
     public Offer addOffer(OfferDto offer) {
         ModelMapper modelMapper = new ModelMapper();
         Offer offerEntity = modelMapper.map(offer, Offer.class);
-        offerEntity.setUser(userRepo.findById(Integer.parseInt(offer.getUserId())).get());
+        offerEntity.setUser(userFeignClient.getUserById(Integer.parseInt(offer.getUserId())));
         return offerRepo.save(offerEntity);
     }
 
@@ -43,7 +43,7 @@ public class OfferService {
         offerEntity.setPrice(offer.getPrice());
         offerEntity.setCity(offer.getCity());
         offerEntity.setPhoneNumber(offer.getPhoneNumber());
-        offerEntity.setUser(userRepo.findById(Integer.parseInt(offer.getUserId())).get());
+        offerEntity.setUser(userFeignClient.getUserById(Integer.parseInt(offer.getUserId())));
         offerEntity.setLatitude(offer.getLatitude());
         offerEntity.setLongitude(offer.getLongitude());
 

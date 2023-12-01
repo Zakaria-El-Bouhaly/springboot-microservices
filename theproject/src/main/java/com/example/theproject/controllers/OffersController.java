@@ -23,15 +23,14 @@ import java.util.Collection;
 @Validated
 public class OffersController {
 
-    private OfferService offerService;
+    private final OfferService offerService;
 
-    @Autowired
+
     public OffersController(OfferService offerService) {
         this.offerService = offerService;
     }
 
     // get all offers
-    @PreAuthorize("hasAuthority('admin')")
     @GetMapping("")
 
     public ResponseEntity getAllOffers() {
@@ -42,7 +41,6 @@ public class OffersController {
         }
     }
 
-    @PreAuthorize("hasAuthority('user')")
     @PostMapping(value = "", consumes = {"multipart/form-data"})
     public ResponseEntity addOffer(@RequestPart @FileSizeConstraint(value = 1 * 1024 * 1024) MultipartFile image, @RequestPart @Valid OfferDto offer) {
 
@@ -54,7 +52,6 @@ public class OffersController {
     }
 
     // update offer
-    @PreAuthorize("hasAuthority('user')")
     @PutMapping("{id}")
     public ResponseEntity updateOffer(@PathVariable int id, @RequestBody @Valid OfferDto offer) {
         try {
@@ -67,7 +64,6 @@ public class OffersController {
     }
 
     // delete offer
-    @PreAuthorize("hasAuthority('user')")
     @DeleteMapping("{id}")
     public ResponseEntity deleteOffer(@PathVariable int id) {
         try {
@@ -89,7 +85,6 @@ public class OffersController {
     }
 
     // get offer by id
-    @PreAuthorize("hasAuthority('user')")
     @GetMapping("{id}")
     public ResponseEntity getOfferById(@PathVariable int id) {
         try {
@@ -100,7 +95,7 @@ public class OffersController {
     }
 
     // get user offers
-    @PreAuthorize("hasAuthority('user')")
+
     @GetMapping("user/{id}")
     public ResponseEntity getUserOffers(@PathVariable int id) {
         // get user id from principal
