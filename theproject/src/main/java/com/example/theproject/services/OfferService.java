@@ -2,10 +2,13 @@ package com.example.theproject.services;
 
 import com.example.theproject.dto.OfferDto;
 import com.example.theproject.models.Offer;
-import com.example.theproject.openfeignclients.UserFeignClient;
+import com.example.theproject.models.UserEntity;
+import com.example.theproject.openfeignclients.UserRoleFeignClient;
 import com.example.theproject.repository.OfferRepo;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +17,15 @@ import java.util.List;
 public class OfferService {
 
     private OfferRepo offerRepo;
-    private final UserFeignClient userFeignClient;
+    private final UserRoleFeignClient userFeignClient;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public OfferService(OfferRepo offerRepo, UserFeignClient userRepo
+    public OfferService(OfferRepo offerRepo, UserRoleFeignClient userRepo, ObjectMapper objectMapper
     ) {
         this.offerRepo = offerRepo;
         this.userFeignClient = userRepo;
+        this.objectMapper = objectMapper;
     }
 
     public List<Offer> getAllOffers() {
@@ -31,7 +36,14 @@ public class OfferService {
     public Offer addOffer(OfferDto offer) {
         ModelMapper modelMapper = new ModelMapper();
         Offer offerEntity = modelMapper.map(offer, Offer.class);
-        offerEntity.setUser(userFeignClient.getUserById(Integer.parseInt(offer.getUserId())));
+
+        ResponseEntity<?> userResponse = userFeignClient.getUserById(Integer.parseInt(offer.getUserId()));
+        if (userResponse.getStatusCode().isError()) {
+            throw new RuntimeException("User not found");
+        }
+        UserEntity user = objectMapper.convertValue(userResponse.getBody(), UserEntity.class);
+
+        offerEntity.setUser(user);
         return offerRepo.save(offerEntity);
     }
 
@@ -43,10 +55,8 @@ public class OfferService {
         offerEntity.setPrice(offer.getPrice());
         offerEntity.setCity(offer.getCity());
         offerEntity.setPhoneNumber(offer.getPhoneNumber());
-        offerEntity.setUser(userFeignClient.getUserById(Integer.parseInt(offer.getUserId())));
         offerEntity.setLatitude(offer.getLatitude());
         offerEntity.setLongitude(offer.getLongitude());
-
         return offerRepo.save(offerEntity);
     }
 

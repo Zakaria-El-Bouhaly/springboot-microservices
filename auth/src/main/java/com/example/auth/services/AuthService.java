@@ -2,59 +2,56 @@ package com.example.auth.services;
 
 import com.example.auth.config.JwtUtils;
 import com.example.auth.dto.AuthresponseDto;
-import com.example.auth.models.Role;
+import com.example.auth.dto.RegisterDto;
+import com.example.auth.dto.UserDto;
 import com.example.auth.models.UserEntity;
 import com.example.auth.openfeignclients.UserRoleFeignClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import feign.FeignException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class AuthService {
     private final UserRoleFeignClient userRoleFeignClient;
-
     private final ObjectMapper objectMapper;
-
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils tokenGenerator;
 
 
-    public AuthService(
-            UserRoleFeignClient userRoleFeignClient,
-            PasswordEncoder passwordEncoder,
-            JwtUtils tokenGenerator,
-            ObjectMapper objectMapper
-    ) {
+    public AuthService(UserRoleFeignClient userRoleFeignClient,
+                       PasswordEncoder passwordEncoder,
+                       JwtUtils tokenGenerator,
+                       ObjectMapper objectMapper) {
         this.userRoleFeignClient = userRoleFeignClient;
         this.passwordEncoder = passwordEncoder;
         this.tokenGenerator = tokenGenerator;
         this.objectMapper = objectMapper;
     }
 
-    public UserEntity register(String email, String password) {
+    public UserEntity register(RegisterDto registerDto) {
 
         try {
-            ResponseEntity<?> userByEmail = userRoleFeignClient.getUserByEmail(email);
+            ResponseEntity<?> userByEmail = userRoleFeignClient.getUserByEmail(registerDto.getEmail());
             if (userByEmail.getStatusCode().is2xxSuccessful()) {
                 throw new RuntimeException("User already exists");
             }
             return null;
-        } catch (Exception e) {
-            UserEntity user = new UserEntity();
-            user.setEmail(email);
-            user.setPassword(passwordEncoder.encode(password));
-            List roles = new ArrayList();
+        } catch (FeignException.NotFound e) {
+            UserDto user = new UserDto();
+            user.setEmail(registerDto.getEmail());
+            user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+            user.setFullName(registerDto.getFullName());
+            user.setRole("USER");
 
-            ResponseEntity re = userRoleFeignClient.getRoleByName("USER");
-            Role role = objectMapper.convertValue(re.getBody(), Role.class);
-            roles.add(role);
-            user.setRoles(roles);
-            userRoleFeignClient.save(user);
-            return user;
+            try {
+                ResponseEntity<?> userResponse = userRoleFeignClient.save(user);
+                UserEntity userEntity = objectMapper.convertValue(userResponse.getBody(), UserEntity.class);
+                return userEntity;
+            } catch (FeignException ex) {
+                throw new RuntimeException("Error saving user");
+            }
         }
     }
 

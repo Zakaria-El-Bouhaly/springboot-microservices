@@ -29,8 +29,6 @@ public class OfferDto {
     private String phoneNumber;
 
 
-    @NotBlank(message = "User id is mandatory")
-    @Min(value = 1, message = "User id must be positive")
     private String userId;
 
     @NotBlank(message = "Latitude is mandatory")

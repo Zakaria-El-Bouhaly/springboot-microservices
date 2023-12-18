@@ -2,7 +2,7 @@ package com.example.theproject.services;
 
 import com.example.theproject.dto.BookingDto;
 import com.example.theproject.models.Booking;
-import com.example.theproject.openfeignclients.UserFeignClient;
+import com.example.theproject.openfeignclients.UserRoleFeignClient;
 import com.example.theproject.repository.BookingRepo;
 import com.example.theproject.repository.OfferRepo;
 import org.modelmapper.ModelMapper;
@@ -16,11 +16,11 @@ public class BookingService {
     private BookingRepo bookingRepo;
     private OfferRepo offerRepo;
 
-    private final UserFeignClient userFeignClient;
+    private final UserRoleFeignClient userFeignClient;
 
     public BookingService(BookingRepo bookingRepo,
-                          UserFeignClient userFeignClient,
-                            OfferRepo offerRepo
+                          UserRoleFeignClient userFeignClient,
+                          OfferRepo offerRepo
     ) {
         this.userFeignClient = userFeignClient;
         this.bookingRepo = bookingRepo;

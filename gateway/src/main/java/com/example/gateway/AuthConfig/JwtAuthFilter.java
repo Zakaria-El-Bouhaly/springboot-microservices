@@ -17,19 +17,21 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Component
-public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.Config> {
+public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.RolesConfig> {
 
 
     @Value("${jwt.secret}")
     private String secret;
 
     public JwtAuthFilter() {
-        super(Config.class);
+
+        super(RolesConfig.class);
+
     }
 
 
     @Override
-    public GatewayFilter apply(Config config) {
+    public GatewayFilter apply(RolesConfig config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
@@ -64,7 +66,7 @@ public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.Co
     }
 
 
-    public static class Config {
+    public static class RolesConfig {
         private List<String> roles;
 
         public List<String> getRoles() {

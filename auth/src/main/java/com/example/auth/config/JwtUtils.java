@@ -35,12 +35,10 @@ public class JwtUtils {
 
     public Map<String, Object> authoritiesToClaims(UserEntity user) {
         Map<String, Object> claims = new HashMap<>();
-        List<String> roles= user.getRoles().stream().map(r->r.getName()).toList();
+        List<String> roles = user.getRoles().stream().map(r -> r.getName()).toList();
         claims.put("roles", roles);
         return claims;
     }
-
- 
 
 
 }

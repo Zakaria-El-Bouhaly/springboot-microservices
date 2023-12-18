@@ -28,8 +28,9 @@ public class AuthController {
     @PostMapping("register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterDto registerDto) {
         try {
-            authService.register(registerDto.getEmail(), registerDto.getPassword());
-            return ResponseEntity.ok("user registered");
+            authService.register(registerDto);
+
+            return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(new CustomErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
